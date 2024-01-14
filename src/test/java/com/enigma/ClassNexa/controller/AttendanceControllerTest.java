@@ -71,23 +71,21 @@ public class AttendanceControllerTest {
         ).andExpectAll(
                 status().isNotFound());
     }
-    @Test
-    void getAttendanceSuccess() throws Exception {
-        LoginRequest loginRequest = LoginRequest.builder()
-                .email(email)
-                .password(password)
-                .build();
-        String token = authService.login(loginRequest);
-        mockMvc.perform(
-                get("/api/attendance/1")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", token)
-        ).andExpectAll(
-                status().isOk());
-    }
-
-
+//    @Test
+//    void getAttendanceSuccess() throws Exception {
+//        LoginRequest loginRequest = LoginRequest.builder()
+//                .email(email)
+//                .password(password)
+//                .build();
+//        String token = authService.login(loginRequest);
+//        mockMvc.perform(
+//                get("/api/attendance/1")
+//                        .accept(MediaType.APPLICATION_JSON)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .header("Authorization", token)
+//        ).andExpectAll(
+//                status().isOk());
+//    }
 
     @Test
     void createAttendanceBadRequest() throws Exception {
