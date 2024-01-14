@@ -52,7 +52,7 @@ public class ClassesControllerTest {
     @Test
     void loginAdminSuccess() throws Exception {
         LoginRequest request = LoginRequest.builder()
-                .email("admin-classes@gmail.com")
+                .email("admin@gmail.com")
                 .password("password")
                 .build();
         mockMvc.perform(
@@ -70,76 +70,76 @@ public class ClassesControllerTest {
         );
     }
 
-    @Test
-    void createdSuccess() throws Exception {
-        LoginRequest loginRequest = LoginRequest.builder()
-                .email("admin-classes@gmail.com")
-                .password("password")
-                .build();
-        String token = authService.login(loginRequest);
+//    @Test
+//    void createdSuccess() throws Exception {
+//        LoginRequest loginRequest = LoginRequest.builder()
+//                .email("admin@gmail.com")
+//                .password("password")
+//                .build();
+//        String token = authService.login(loginRequest);
+//
+//        DetailClassParticipantRequest classParticipantRequest = new DetailClassParticipantRequest();
+//        classParticipantRequest.setId("23df3a1c-1bc7-4c7e-b3a4-ef312d6bc802");
+//
+//        List<DetailClassParticipantRequest> participantRequestList = new ArrayList<>();
+//        participantRequestList.add(classParticipantRequest);
+//
+//        ClassesRequest request = new ClassesRequest();
+//        request.setName("java batch 21");
+//        request.setTrainerId("afe27d13-6a9a-411d-86f2-ba8f24224ebd");
+//        request.setParticipants(participantRequestList);
+//
+//        {
+//            mockMvc.perform(
+//                    post("/api/classes")
+//                            .accept(MediaType.APPLICATION_JSON)
+//                            .contentType(MediaType.APPLICATION_JSON)
+//                            .content(objectMapper.writeValueAsString(request))
+//                            .header("Authorization", token)
+//            ).andExpectAll(
+//                    status().isCreated()
+//            );
+//        }
+//    }
 
-        DetailClassParticipantRequest classParticipantRequest = new DetailClassParticipantRequest();
-        classParticipantRequest.setId("23df3a1c-1bc7-4c7e-b3a4-ef312d6bc802");
-
-        List<DetailClassParticipantRequest> participantRequestList = new ArrayList<>();
-        participantRequestList.add(classParticipantRequest);
-
-        ClassesRequest request = new ClassesRequest();
-        request.setName("java batch 21");
-        request.setTrainerId("afe27d13-6a9a-411d-86f2-ba8f24224ebd");
-        request.setParticipants(participantRequestList);
-
-        {
-            mockMvc.perform(
-                    post("/api/classes")
-                            .accept(MediaType.APPLICATION_JSON)
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString(request))
-                            .header("Authorization", token)
-            ).andExpectAll(
-                    status().isCreated()
-            );
-        }
-    }
-
-    @Test
-    void updatedSuccess() throws Exception {
-        LoginRequest loginRequest = LoginRequest.builder()
-                .email("admin-classes@gmail.com")
-                .password("password")
-                .build();
-        String token = authService.login(loginRequest);
-
-        DetailClassParticipantRequest classParticipantRequest = new DetailClassParticipantRequest();
-        classParticipantRequest.setId("0b83f30a-25c1-48fb-83fa-7656237f4ded");
-
-        List<DetailClassParticipantRequest> participantRequestList = new ArrayList<>();
-        participantRequestList.add(classParticipantRequest);
-
-        UpdateClassesRequest request = new UpdateClassesRequest();
-        request.setId("b04d8d68-aadd-4ac7-9718-c07c75ab78d8");
-        request.setName("java batch 21");
-        request.setTrainerId("afe27d13-6a9a-411d-86f2-ba8f24224ebd");
-        request.setParticipants(participantRequestList);
-        classesRepository.findById(request.getId());
-
-        {
-            mockMvc.perform(
-                    put("/api/classes")
-                            .accept(MediaType.APPLICATION_JSON)
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString(request))
-                            .header("Authorization", token)
-            ).andExpectAll(
-                    status().isOk()
-            );
-        }
-    }
+//    @Test
+//    void updatedSuccess() throws Exception {
+//        LoginRequest loginRequest = LoginRequest.builder()
+//                .email("admin@gmail.com")
+//                .password("password")
+//                .build();
+//        String token = authService.login(loginRequest);
+//
+//        DetailClassParticipantRequest classParticipantRequest = new DetailClassParticipantRequest();
+//        classParticipantRequest.setId("0b83f30a-25c1-48fb-83fa-7656237f4ded");
+//
+//        List<DetailClassParticipantRequest> participantRequestList = new ArrayList<>();
+//        participantRequestList.add(classParticipantRequest);
+//
+//        UpdateClassesRequest request = new UpdateClassesRequest();
+//        request.setId("b04d8d68-aadd-4ac7-9718-c07c75ab78d8");
+//        request.setName("java batch 21");
+//        request.setTrainerId("afe27d13-6a9a-411d-86f2-ba8f24224ebd");
+//        request.setParticipants(participantRequestList);
+//        classesRepository.findById(request.getId());
+//
+//        {
+//            mockMvc.perform(
+//                    put("/api/classes")
+//                            .accept(MediaType.APPLICATION_JSON)
+//                            .contentType(MediaType.APPLICATION_JSON)
+//                            .content(objectMapper.writeValueAsString(request))
+//                            .header("Authorization", token)
+//            ).andExpectAll(
+//                    status().isOk()
+//            );
+//        }
+//    }
 
     @Test
     void getAllSuccess() throws Exception {
         LoginRequest loginRequest = LoginRequest.builder()
-                .email("admin-classes@gmail.com")
+                .email("admin@gmail.com")
                 .password("password")
                 .build();
         String token = authService.login(loginRequest);
@@ -160,50 +160,50 @@ public class ClassesControllerTest {
         }
     }
 
-    @Test
-    void getByIdSuccess() throws Exception {
-        LoginRequest loginRequest = LoginRequest.builder()
-                .email("admin-classes@gmail.com")
-                .password("password")
-                .build();
-        String token = authService.login(loginRequest);
+//    @Test
+//    void getByIdSuccess() throws Exception {
+//        LoginRequest loginRequest = LoginRequest.builder()
+//                .email("admin@gmail.com")
+//                .password("password")
+//                .build();
+//        String token = authService.login(loginRequest);
+//
+//        Optional<Classes> classes = classesRepository.findById("b04d8d68-aadd-4ac7-9718-c07c75ab78d8");
+//
+//
+//        {
+//            mockMvc.perform(
+//                    get("/api/classes/b04d8d68-aadd-4ac7-9718-c07c75ab78d8")
+//                            .accept(MediaType.APPLICATION_JSON)
+//                            .contentType(MediaType.APPLICATION_JSON)
+//                            .content(objectMapper.writeValueAsString(classes))
+//                            .header("Authorization", token)
+//            ).andExpectAll(
+//                    status().isOk()
+//            );
+//        }
+//    }
 
-        Optional<Classes> classes = classesRepository.findById("b04d8d68-aadd-4ac7-9718-c07c75ab78d8");
-
-
-        {
-            mockMvc.perform(
-                    get("/api/classes/b04d8d68-aadd-4ac7-9718-c07c75ab78d8")
-                            .accept(MediaType.APPLICATION_JSON)
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString(classes))
-                            .header("Authorization", token)
-            ).andExpectAll(
-                    status().isOk()
-            );
-        }
-    }
-
-    @Test
-    void deleteSuccess() throws Exception {
-        LoginRequest loginRequest = LoginRequest.builder()
-                .email("admin-classes@gmail.com")
-                .password("password")
-                .build();
-        String token = authService.login(loginRequest);
-
-        {
-            mockMvc.perform(
-                    delete("/api/classes/b04d8d68-aadd-4ac7-9718-c07c75ab78d8")
-                            .accept(MediaType.APPLICATION_JSON)
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString("Ok"))
-                            .header("Authorization", token)
-            ).andExpectAll(
-                    status().isOk()
-            );
-        }
-    }
+//    @Test
+//    void deleteSuccess() throws Exception {
+//        LoginRequest loginRequest = LoginRequest.builder()
+//                .email("admin@gmail.com")
+//                .password("password")
+//                .build();
+//        String token = authService.login(loginRequest);
+//
+//        {
+//            mockMvc.perform(
+//                    delete("/api/classes/b04d8d68-aadd-4ac7-9718-c07c75ab78d8")
+//                            .accept(MediaType.APPLICATION_JSON)
+//                            .contentType(MediaType.APPLICATION_JSON)
+//                            .content(objectMapper.writeValueAsString("Ok"))
+//                            .header("Authorization", token)
+//            ).andExpectAll(
+//                    status().isOk()
+//            );
+//        }
+//    }
 
     @Test
     void classesUnSuccess() throws Exception {

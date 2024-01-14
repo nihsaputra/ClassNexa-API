@@ -4,10 +4,7 @@ import com.enigma.ClassNexa.entity.Trainer;
 import com.enigma.ClassNexa.model.request.ProfileUpdateRequest;
 import com.enigma.ClassNexa.model.request.SearchUserRequest;
 import com.enigma.ClassNexa.model.request.UpdatePasswordRequest;
-import com.enigma.ClassNexa.model.response.CommonResponse;
-import com.enigma.ClassNexa.model.response.PagingResponse;
-import com.enigma.ClassNexa.model.response.UserResponse;
-import com.enigma.ClassNexa.model.response.WebResponse;
+import com.enigma.ClassNexa.model.response.*;
 import com.enigma.ClassNexa.service.TrainerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,17 +30,19 @@ public class TrainerController {
                                     @RequestParam(required = false, defaultValue = "10") Integer size){
         SearchUserRequest buildSearch = SearchUserRequest.builder().name(name).page(page).size(size).build();
         Page<Trainer> pageTrainer = trainerService.getAll(buildSearch);
-        List<UserResponse> userGetResponses = new ArrayList<>();
+        List<TrainerGetResponse> userGetResponses = new ArrayList<>();
         for (Trainer trainer : pageTrainer.getContent()) {
-            UserResponse buildResponse = UserResponse.builder().id(trainer.getId())
+            TrainerGetResponse buildResponse = TrainerGetResponse.builder().id(trainer.getId())
                     .name(trainer.getName())
                     .gender(trainer.getGender())
                     .address(trainer.getAddress())
                     .email(trainer.getUserCredential().getEmail())
-                    .phoneNumber(trainer.getPhoneNumber()).build();
+                    .phoneNumber(trainer.getPhoneNumber())
+                    .classes(trainer.getClasses().stream().map(classes -> classes.getName()).toList())
+                    .build();
             userGetResponses.add(buildResponse);
         }
-        WebResponse<List<UserResponse>> response = WebResponse.<List<UserResponse>>builder()
+        WebResponse<List<TrainerGetResponse>> response = WebResponse.<List<TrainerGetResponse>>builder()
                 .status(HttpStatus.OK.getReasonPhrase())
                 .message("successfuly get trainer")
                 .pagingResponse(new PagingResponse(pageTrainer.getTotalElements(),

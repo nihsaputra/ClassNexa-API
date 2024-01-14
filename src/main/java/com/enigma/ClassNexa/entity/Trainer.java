@@ -3,6 +3,8 @@ package com.enigma.ClassNexa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -24,6 +26,9 @@ public class Trainer {
     private String phoneNumber;
 
     private String gender;
+
+    @OneToMany(mappedBy = "trainer")
+    private List<Classes> classes;
 
     @OneToOne
     @JoinColumn(name = "user_credential_id", referencedColumnName = "id")
