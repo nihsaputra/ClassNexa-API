@@ -20,4 +20,8 @@ public class Documentation {
     @ManyToOne
     private Schedule schedule;
 
+    @Lob
+    @Column(name = "image_data")
+    private byte[] imageData;
+
 }

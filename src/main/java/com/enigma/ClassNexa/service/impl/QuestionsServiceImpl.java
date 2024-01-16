@@ -71,6 +71,7 @@ public class QuestionsServiceImpl implements QuestionsService {
                         .participant(participant1)
                         .schedule(schedule)
                         .build();
+                Questions save = questionsRepository.save(questions);
 
                 List<DetailClassParticipant> byClassId = detailClassParticipantRepository.findByClassesId(schedule.getClasses_id().getId());
                 for (int i=0;i<byClassId.size();i++){
@@ -81,7 +82,7 @@ public class QuestionsServiceImpl implements QuestionsService {
                         String message = "Pertanyaan anda sudah kami terima"+ byParticipantId.getName();
                         sendEmailService.sendEmail(userCredential.getEmail(), subject, message);
                 }
-                return toParticipantQuestionsResponse(questions);
+                return toParticipantQuestionsResponse(save);
         }
 
         @Override

@@ -46,10 +46,7 @@ public class DocumetationServiceImpl implements DocumetationService {
                 .date(String.valueOf(documentation.getSchedule().getStart_class()))
                 .build();
     }
-
-
-//    private final String FILE_PATH = "classpath:static"+"\n"+"mage";
-    private final String FILE_PATH2 = "/src/main/resources/image/";
+    
     @Override
     @Transactional(rollbackFor = Exception.class)
     public DocumentationResponse create(MultipartFile multipartFile, SearchDocumentationRequest request) throws IOException {
@@ -62,34 +59,16 @@ public class DocumetationServiceImpl implements DocumetationService {
                 .fileName(String.valueOf(uuid)+".png")
                 .trainer(byId)
                 .schedule(byIdSchedule)
+                .imageData(multipartFile.getBytes())
                 .build();
         Documentation save = documetationRepository.save(documentation);
 
-        String projectname = "ClassNexa";
-        Path projectDirectory = Paths.get(System.getProperty("user.dir"), projectname);
-
-        String filePathString = projectDirectory.toAbsolutePath()+FILE_PATH2+save.getFileName();
-
-        log.info(filePathString);
-        multipartFile.transferTo(new File(filePathString));
         return toDocumentationResponse(save);
     }
 
     @Override
     public byte[] download(String filename) throws IOException {
-        Documentation byName = documetationRepository.findByFileName(filename);
-        String projectname = "ClassNexa";
-        Path projectDirectory = Paths.get(System.getProperty("user.dir"), projectname);
-        String filepath = projectDirectory.toAbsolutePath()+FILE_PATH2+byName.getFileName();
-        DocumentationClaim documentationClaim = DocumentationClaim.builder()
-                .id(byName.getId())
-                .fileName(byName.getFileName())
-                .trainer(byName.getTrainer().getId())
-                .schedule(byName.getSchedule().getId())
-                .path(filepath)
-                .build();
-
-        return Files.readAllBytes(new File(filepath).toPath());
+        return documetationRepository.findByFileName(filename).getImageData();
     }
 
     @Override
@@ -118,9 +97,6 @@ public class DocumetationServiceImpl implements DocumetationService {
         Trainer byId = trainerService.getByTrainerId(documentation.getTrainer());
         Schedule byIdSchedule = scheduleService.getByIdSchedule(documentation.getSchedule());
 
-        String projectname = "ClassNexa";
-        Path projectDirectory = Paths.get(System.getProperty("user.dir"), projectname);
-
         UUID uuid = UUID.nameUUIDFromBytes(multipartFile.getOriginalFilename().getBytes());
 
         Documentation documentation1 = Documentation.builder()
@@ -128,11 +104,10 @@ public class DocumetationServiceImpl implements DocumetationService {
                 .fileName(String.valueOf(uuid)+".png")
                 .trainer(byId)
                 .schedule(byIdSchedule)
+                .imageData(multipartFile.getBytes())
                 .build();
         Documentation save = documetationRepository.save(documentation1);
 
-        String filePathString = projectDirectory.toAbsolutePath()+FILE_PATH2+save.getFileName();
-        multipartFile.transferTo(new File(filePathString));
         return toDocumentationResponse(save);
     }
 

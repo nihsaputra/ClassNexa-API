@@ -144,7 +144,7 @@ public class ClassesControllerTest {
                 .build();
         String token = authService.login(loginRequest);
 
-        List<Classes> classes = classesRepository.findAll();
+//        List<Classes> classes = classesRepository.findAll();
 
 
         {
@@ -152,7 +152,6 @@ public class ClassesControllerTest {
                     get("/api/classes")
                             .accept(MediaType.APPLICATION_JSON)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper.writeValueAsString(classes))
                             .header("Authorization", token)
             ).andExpectAll(
                     status().isOk()
